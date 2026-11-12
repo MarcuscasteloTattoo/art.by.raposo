@@ -107,7 +107,7 @@ const TXT = {
       avLead: "Avaliações reais de quem já tatuou com o Raposo, direto do Google.",
       avLink: "Ver todas as avaliações no Google",
       locTitulo: "Onde estamos",
-      locEnd: "Miami – Flórida, EUA",
+      locEnd: "450 NW 28th St<br>Miami – Flórida, EUA",
       locAviso: "Atendimento somente com hora marcada.",
       locVerMapa: "Ver no Google Maps",
       orcTitulo: "Vamos criar a sua próxima tatuagem?",
@@ -203,7 +203,7 @@ const TXT = {
       orcTitulo: "Shall we create your next tattoo?",
       orcTexto: "Every project starts with a good conversation. Answer three quick questions about your idea, then send everything to me on <strong>Instagram Direct</strong> so I can design an <strong>exclusive project</strong> for you.",
       orcSub: "It takes less than a minute",
-      locTitulo: "Find us", locEnd: "Miami – Florida, USA", locAviso: "By appointment only.", locVerMapa: "View on Google Maps", direitos: "All rights reserved.",
+      locTitulo: "Find us", locEnd: "450 NW 28th St<br>Miami – Florida, USA", locAviso: "By appointment only.", locVerMapa: "View on Google Maps", direitos: "All rights reserved.",
     },
     a: {
       langAria: "Language", heroAlt: "Tattoo artist with glasses and black gloves, focused while tattooing an arm, with a rose tattooed on his neck",
@@ -283,7 +283,7 @@ const TXT = {
       orcTitulo: "¿Creamos tu próximo tatuaje?",
       orcTexto: "Todo proyecto empieza con una buena conversación. Responde tres preguntas rápidas sobre tu idea y luego envíame todo por el <strong>Direct de Instagram</strong>, para que diseñe un <strong>proyecto exclusivo</strong> para ti.",
       orcSub: "Toma menos de un minuto",
-      locTitulo: "Dónde estamos", locEnd: "Miami – Florida, EE. UU.", locAviso: "Atención solo con cita previa.", locVerMapa: "Ver en Google Maps", direitos: "Todos los derechos reservados.",
+      locTitulo: "Dónde estamos", locEnd: "450 NW 28th St<br>Miami – Florida, EE. UU.", locAviso: "Atención solo con cita previa.", locVerMapa: "Ver en Google Maps", direitos: "Todos los derechos reservados.",
     },
     a: {
       langAria: "Idioma", heroAlt: "Tatuador con gafas y guantes negros, concentrado mientras tatúa un brazo, con una rosa tatuada en el cuello",
