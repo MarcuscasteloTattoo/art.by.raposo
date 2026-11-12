@@ -1,4 +1,4 @@
-/* Comportamento do site (idiomas, carrosséis, formulário, lightbox).
+/* Comportamento do site (idiomas, carrosséis, mapa, lightbox).
    Normalmente não é preciso mexer aqui. */
 /* ============ CÓDIGO ============ */
 const $ = (id) => document.getElementById(id);
@@ -38,7 +38,6 @@ function setLang(code, first) {
   document.querySelectorAll("[data-t]").forEach((el) => { el.innerHTML = L.t[el.dataset.t] ?? TXT.pt.t[el.dataset.t]; });
   document.querySelectorAll("[data-a]").forEach((el) => { const [attr, k] = el.dataset.a.split(":"); el.setAttribute(attr, L.a[k] ?? TXT.pt.a[k]); });
   document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === code)));
-  document.querySelectorAll(".js-wa").forEach((a) => { a.href = `${site.whatsapp}?text=${encodeURIComponent(L.msg)}`; });
   renderMarquee(); renderReviews();
   if (first) { renderCarousel(); renderGrid(); return; }
   /* carrossel e grade: só troca textos, sem recriar (não perde posição) */
@@ -149,43 +148,6 @@ $("reviews").addEventListener("click", (e) => {
   if (!("IntersectionObserver" in window)) return load();
   const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { load(); io.disconnect(); } }, { rootMargin: "300px" });
   io.observe(box);
-})();
-
-/* --- formulário: nome + telefone (máscara BR) e envio pelo WhatsApp --- */
-(function () {
-  const form = $("lead-form"), nome = $("f-nome"), tel = $("f-tel");
-  /* (21) 3456-7890 para fixo, (21) 97472-2394 para celular */
-  function mask(v) {
-    const d = v.replace(/\D/g, "").slice(0, 11);
-    if (d.length <= 2) return d ? `(${d}` : "";
-    if (d.length <= 6) return `(${d.slice(0, 2)}) ${d.slice(2)}`;
-    if (d.length <= 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
-    return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
-  }
-  const telOk = (v) => { const d = v.replace(/\D/g, ""); return d[0] !== "0" && (d.length === 10 || (d.length === 11 && d[2] === "9")); };
-  const setErr = (input, msg) => { input.setAttribute("aria-invalid", msg ? "true" : "false"); $(input.getAttribute("aria-describedby")).textContent = msg; };
-  tel.addEventListener("input", () => { tel.value = mask(tel.value); if (tel.getAttribute("aria-invalid") === "true" && telOk(tel.value)) setErr(tel, ""); });
-  nome.addEventListener("input", () => { if (nome.value.trim().length >= 2) setErr(nome, ""); });
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const okN = nome.value.trim().length >= 2, okT = telOk(tel.value);
-    setErr(nome, okN ? "" : L.form.errNome); setErr(tel, okT ? "" : L.form.errTel);
-    if (!okN) return nome.focus();
-    if (!okT) return tel.focus();
-    const digits = tel.value.replace(/\D/g, "");
-    /* envia o cadastro para o Make (formato de formulário, não precisa de CORS) */
-    const dados = new URLSearchParams({
-      nome: nome.value.trim(), telefone: tel.value, telefone_whatsapp: "55" + digits,
-      idioma: document.documentElement.lang, pagina: location.href,
-      /* data e hora de Brasília: 23/10/2026 16:29:05 */
-      data: new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).replace(",", ""),
-    });
-    if (site.webhook) { try { fetch(site.webhook, { method: "POST", body: dados, mode: "no-cors", keepalive: true }).catch(() => {}); } catch (_) {} }
-    $("form-ok").textContent = site.whatsapp ? L.form.ok : L.form.okSemWa; $("form-ok").hidden = false;
-    /* nome e telefone vão só para o webhook; o WhatsApp abre apenas com a mensagem padrão */
-    const texto = L.msg;
-    if (site.whatsapp) window.open(`${site.whatsapp}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
-  });
 })();
 
 /* --- lightbox: portfólio (com setas) e fotos das avaliações (avulsas) --- */

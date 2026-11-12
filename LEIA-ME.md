@@ -1,4 +1,4 @@
-# Site base (estrutura do Léo Lead Tattoo)
+# Art by Raposo — site
 
 Site estático: só HTML, CSS e JavaScript puro, sem build e sem dependências.
 Para publicar, envie o conteúdo desta pasta para a raiz do domínio (ex.: `public_html` na Hostinger).
@@ -8,9 +8,8 @@ Para publicar, envie o conteúdo desta pasta para a raiz do domínio (ex.: `publ
 ```
 index.html        → estrutura da página + textos em português (SEO)
 css/style.css     → visual (cores e fontes nas variáveis de :root, no topo)
-js/conteudo.js    → TUDO que muda de um cliente para outro: WhatsApp, webhook,
-                    fotos, avaliações, portfólio e traduções EN/ES
-js/main.js        → comportamento (idiomas, carrosséis, formulário, lightbox)
+js/conteudo.js    → fotos, avaliações, portfólio e traduções EN/ES
+js/main.js        → comportamento (idiomas, carrosséis, mapa, lightbox)
 assets/           → fotos em .webp (cada uma com versão "-480" para celular)
 favicon.png, apple-touch-icon.png, .htaccess (cache/compressão)
 ```
@@ -23,14 +22,14 @@ favicon.png, apple-touch-icon.png, .htaccess (cache/compressão)
 | Textos em português (topo, sobre, avaliações, orçamento) | `index.html`, elementos com `data-t="..."` |
 | Textos em inglês e espanhol | `js/conteudo.js` → `TXT.en.t` e `TXT.es.t` (mesmas chaves do `data-t`) |
 | Textos do letreiro animado | `js/conteudo.js` → `TXT.*.marquee` |
-| Número de WhatsApp e mensagem padrão | `js/conteudo.js` → `site.whatsapp` e `TXT.*.msg` |
-| Para onde vão os cadastros do formulário | `js/conteudo.js` → `site.webhook` (Make, Zapier, n8n…) |
+| Link do botão de orçamento (Direct do Instagram) | `index.html` → `<a ... id="cta" href="...">` |
 | Carrossel "Projetos recentes" | `site.estilos` (fotos) + `TXT.*.estilos` (título, texto, descrição da foto) |
 | Grade do portfólio | `site.portfolio` (fotos) + `TXT.*.portfolio` (descrições), na mesma ordem |
 | Avaliações | `site.avaliacoes` (nome, meses, texto, fotos opcionais) |
 | Nota e quantidade de avaliações | `index.html` (`data-t="nota"` e `"avBadge"`) + EN/ES em `TXT.*.t` |
-| Endereço, mapa, Instagram, link do Google | `index.html` (seções `#localizacao`, `#sobre`, `#avaliacoes`, `footer`) |
-| Preço médio | `index.html` (`data-t="orcTexto"`) + EN/ES |
+| Endereço, mapa, foto do estúdio, Instagram | `index.html` (seções `#localizacao`, `#sobre`, `footer`) |
+| Avaliações (seção escondida) | tire o `hidden` de `#avaliacoes` no `index.html` e preencha `site.avaliacoes` |
+| Texto da seção de orçamento | `index.html` (`data-t="orcTexto"`) + EN/ES |
 | Cores e fontes | `css/style.css` → `:root` (`--gold`, `--accent`, `--ink`, `--display`, `--body`…) e o link do Google Fonts no `index.html` |
 
 ## Fotos
