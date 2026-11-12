@@ -194,7 +194,10 @@ img { max-width: 100%; display: block; }
 
 /* ---------- LOCALIZAÇÃO ---------- */
 .loc { display: grid; gap: 2rem; align-items: center; }
-@media (min-width: 768px) { .loc { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 3.5rem; } }
+@media (min-width: 768px) { .loc { grid-template-columns: minmax(0, .6fr) minmax(0, 1.4fr); gap: 3rem; } }
+.loc-media { display: grid; gap: 1rem; }
+@media (min-width: 640px) { .loc-media { grid-template-columns: repeat(2, minmax(0, 1fr)); } .loc-media .map { aspect-ratio: 4 / 5; } }
+.loc-img { width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: .75rem; }
 .loc h2 { font-size: clamp(1.875rem, 1.5rem + 1.2vw, 2.25rem); line-height: 1.15; }
 .loc-addr { margin-top: 1.25rem; display: flex; gap: .6rem; align-items: flex-start; font-style: normal; line-height: 1.6; color: var(--muted); }
 .loc-addr svg { width: 1.25rem; height: 1.25rem; flex: none; margin-top: .15rem; color: var(--accent); }

@@ -19,7 +19,7 @@
 <!-- fontes carregadas sem bloquear a primeira pintura da página -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/style.css?v=2">
+<link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -81,8 +81,7 @@
         <p data-t="sobre1">Sou o Raposo, tatuador de fineline e blackwork, apaixonado por traços finos, florais e composições delicadas.</p>
         <p data-t="sobre2">Cada projeto é criado de forma personalizada, a partir da sua ideia e da sua história, com atenção a cada linha, sombra e detalhe.</p>
         <p data-t="sobre3">Vamos juntos transformar suas ideias em arte?</p>
-        <!-- Instagram: troque o @ e tire o "hidden" -->
-        <a class="link" href="https://www.instagram.com/SEU_INSTAGRAM/" target="_blank" rel="noopener noreferrer" hidden><svg class="icon"><use href="#i-ig"/></svg>@SEU_INSTAGRAM</a>
+        <a class="link" href="https://www.instagram.com/art.by.raposo/" target="_blank" rel="noopener noreferrer"><svg class="icon"><use href="#i-ig"/></svg>@art.by.raposo</a>
       </div>
     </div>
   </section>
@@ -113,15 +112,19 @@
     </div>
   </section>
 
-  <!-- Localização: escondida até ter o endereço do Raposo (troque endereço, mapa e tire o "hidden") -->
-  <section class="wrap section" id="localizacao" hidden>
+  <section class="wrap section" id="localizacao">
     <div class="loc">
       <div>
         <h2 data-t="locTitulo">Onde estamos</h2>
-        <address class="loc-addr"><svg aria-hidden="true"><use href="#i-pin"/></svg><span>ENDEREÇO DO ESTÚDIO<br>CIDADE – UF, CEP</span></address>
-        <p class="loc-note"><svg aria-hidden="true"><use href="#i-clock"/></svg><span data-t="locAviso">Estúdio privado. Atendimento somente com hora marcada.</span></p>
+        <!-- endereço: troque pelo endereço completo do estúdio quando tiver -->
+        <address class="loc-addr"><svg aria-hidden="true"><use href="#i-pin"/></svg><span data-t="locEnd">Miami – Flórida, EUA</span></address>
+        <p class="loc-note"><svg aria-hidden="true"><use href="#i-clock"/></svg><span data-t="locAviso">Atendimento somente com hora marcada.</span></p>
       </div>
-      <div class="map" id="map" data-src="https://www.google.com/maps?q=ENDERECO&amp;output=embed"><a class="map-ph" href="https://maps.google.com/" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-pin"/></svg><span data-t="locVerMapa">Ver no Google Maps</span></a></div>
+      <div class="loc-media">
+        <img class="loc-img" src="assets/estudio-miami.webp" srcset="assets/estudio-miami-480.webp 480w, assets/estudio-miami.webp 800w" sizes="(min-width: 768px) 22rem, 100vw" width="800" height="1000" loading="lazy" decoding="async" data-a="alt:locAlt" alt="Interior do estúdio de tatuagem em Miami, amplo e iluminado, com macas pretas, plantas e murais de grafite em preto e branco">
+        <!-- mapa: troque "Miami, FL" pelo endereço completo (no data-src e no link) -->
+        <div class="map" id="map" data-src="https://www.google.com/maps?q=Miami%2C%20FL&amp;output=embed"><a class="map-ph" href="https://www.google.com/maps/search/?api=1&amp;query=Miami%2C%20FL" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-pin"/></svg><span data-t="locVerMapa">Ver no Google Maps</span></a></div>
+      </div>
     </div>
   </section>
 
@@ -155,7 +158,7 @@
   <div class="wrap foot">
     <div class="foot-row">
       <p class="foot-brand">Art by Raposo</p>
-      <span class="foot-links" hidden><a href="https://www.instagram.com/SEU_INSTAGRAM/" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-ig"/></svg>@SEU_INSTAGRAM</a></span>
+      <span class="foot-links"><a href="https://www.instagram.com/art.by.raposo/" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-ig"/></svg>@art.by.raposo</a></span>
     </div>
     <p class="copy">© <span id="year">2026</span> Art by Raposo. <span data-t="direitos">Todos os direitos reservados.</span></p>
   </div>
@@ -169,7 +172,7 @@
   <p class="lb-caption" id="lb-caption"></p>
 </div>
 
-<script src="js/conteudo.js?v=3"></script>
+<script src="js/conteudo.js?v=4"></script>
 <script src="js/main.js?v=2"></script>
 </body>
 </html>
