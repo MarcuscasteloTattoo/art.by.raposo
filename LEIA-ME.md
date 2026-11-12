@@ -35,7 +35,7 @@ favicon.png, apple-touch-icon.png, .htaccess (cache/compressão)
 
 ## Fotos
 
-- Formato `.webp`, retrato 4:5 (ex.: 900×1125). Crie também a versão de 480 px de largura com o sufixo `-480` (ex.: `leo-04.webp` e `leo-04-480.webp`).
+- Formato `.webp`, retrato 4:5 (ex.: 900×1125). Crie também a versão de 480 px de largura com o sufixo `-480` (ex.: `trabalho-01.webp` e `trabalho-01-480.webp`).
 - O `.htaccess` guarda fotos em cache por 1 ano: ao trocar uma foto, use um **nome de arquivo novo**.
 - Ao editar `css/style.css` ou os `.js`, aumente o `?v=1` no `index.html` (`?v=2`, `?v=3`…) para os visitantes receberem a versão nova.
 
