@@ -14,8 +14,10 @@ function photo(src, alt, sizes, lazy = true) {
 
 /* --- render --- */
 function renderMarquee() {
-  const w = [...L.marquee, ...L.marquee, ...L.marquee, ...L.marquee];
-  $("marquee").innerHTML = w.map((x) => `<span>${esc(x)} <b>•</b></span>`).join("");
+  /* uma volta das palavras por tira; repete só se for curta demais para a tela */
+  const w = innerWidth > 1000 ? [...L.marquee, ...L.marquee] : L.marquee;
+  const html = w.map((x) => `<span>${esc(x)} <b>•</b></span>`).join("");
+  $("marquee").innerHTML = html; $("marquee2").innerHTML = html;
 }
 function renderCarousel() {
   const card = (e, i) => { const [tit, txt, alt] = L.estilos[i]; return `<article class="style-card">${photo(e.img, alt, "(min-width: 640px) 19rem, 15rem")}<h3>${esc(tit)}</h3><p>${esc(txt)}</p></article>`; };

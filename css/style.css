@@ -78,10 +78,11 @@ img { max-width: 100%; display: block; }
 
 /* letreiro */
 .marquee { position: relative; z-index: 1; display: flex; overflow: hidden; padding-block: .75rem; background: var(--ink); border-block: 1px solid rgb(214 178 94 / .35); }
-.marquee-track { display: flex; flex: none; gap: 2rem; padding-right: 2rem; white-space: nowrap; animation: marquee 30s linear infinite; }
+/* duas tiras iguais lado a lado (cada uma pequena, para o Safari do iPhone não deixar de desenhar) */
+.marquee-track { display: flex; flex: none; gap: 2rem; padding-right: 2rem; white-space: nowrap; animation: marquee 22s linear infinite; will-change: transform; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 .marquee span { display: inline-flex; gap: 2rem; font-size: .75rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--hero-muted); }
 .marquee b { color: var(--gold); font-weight: 400; }
-@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes marquee { from { transform: translate3d(0,0,0); } to { transform: translate3d(-100%,0,0); } }
 
 /* ---------- FOTOS ---------- */
 .ph { position: relative; display: block; width: 100%; aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--r); background: var(--soft); }
@@ -290,4 +291,33 @@ footer { background: var(--ink); color: var(--hero-fg); border-top: 1px solid rg
   html { scroll-behavior: auto; }
   .marquee-track { animation: none; }
   .btn-cta, .pf .ph, .review-photo img { transition: none; }
+}
+
+/* ---------- AJUSTES DO CELULAR ---------- */
+@media (max-width: 767px) {
+  /* topo: foto menor para título e faixa de palavras aparecerem na primeira tela */
+  .hero-img { aspect-ratio: 1 / 1; object-position: 50% 30%; max-height: 58svh; }
+  .hero-inner { padding-block: 0 2rem; }
+  .hero .brand { margin-bottom: .6rem; }
+  .hero-sub { margin-top: 1rem; }
+  /* menos espaço vazio entre as seções */
+  .section { padding-block: 3rem; }
+  .projects > .section { padding-block: 2.5rem 1.5rem; }
+  #portfolio { padding-top: 1.5rem; }
+  .about { gap: 1.75rem; }
+  .about-img { max-width: 100%; }
+  .loc { gap: 1.5rem; }
+  .loc-media .map { aspect-ratio: 4 / 3; }
+  /* áreas de toque maiores */
+  .lang button { min-height: 2.5rem; padding-inline: .6rem .75rem; }
+  .about .link, .foot-links a { min-height: 2.75rem; }
+  .ctrl { width: 2.75rem; height: 2.75rem; }
+  .copy { font-size: .75rem; }
+  .qf-count { font-size: .75rem; }
+}
+
+/* qualquer tela de toque (inclui celular deitado e tablet) */
+@media (pointer: coarse) {
+  .lang button { min-height: 2.5rem; padding-inline: .6rem .75rem; }
+  .about .link, .foot-links a { min-height: 2.75rem; }
 }
