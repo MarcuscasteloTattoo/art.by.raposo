@@ -6,7 +6,7 @@ Para publicar, envie o conteúdo desta pasta para a raiz do domínio (ex.: `publ
 ## Estrutura
 
 ```
-index.html        → estrutura da página + textos em português (SEO)
+index.html        → estrutura da página + textos em inglês (idioma principal, SEO)
 css/style.css     → visual (cores e fontes nas variáveis de :root, no topo)
 js/conteudo.js    → fotos, avaliações, portfólio e traduções EN/ES
 js/main.js        → comportamento (idiomas, carrosséis, mapa, lightbox)
@@ -19,10 +19,12 @@ favicon.png, apple-touch-icon.png, .htaccess (cache/compressão)
 | O que | Onde |
 |---|---|
 | Título da aba, descrição do Google, imagem de compartilhamento | `index.html`, linhas 6–16 (`<title>`, `meta description`, `og:*`) |
-| Textos em português (topo, sobre, avaliações, orçamento) | `index.html`, elementos com `data-t="..."` |
-| Textos em inglês e espanhol | `js/conteudo.js` → `TXT.en.t` e `TXT.es.t` (mesmas chaves do `data-t`) |
+| Textos em inglês (topo, sobre, orçamento…) | `index.html`, elementos com `data-t="..."` |
+| Textos em português e espanhol | `js/conteudo.js` → `TXT.pt.t` e `TXT.es.t` (mesmas chaves do `data-t`) |
 | Textos do letreiro animado | `js/conteudo.js` → `TXT.*.marquee` |
-| Link do botão de orçamento (Direct do Instagram) | `index.html` → `<a ... id="cta" href="...">` |
+| Link do Direct (botão final do formulário) | `js/conteudo.js` → `site.direct` |
+| Perguntas, opções e textos do formulário | `js/conteudo.js` → `TXT.*.qf` (en, pt, es) |
+| Receber as respostas em planilha/CRM | `js/conteudo.js` → `site.webhook` (Make, Zapier, n8n…) |
 | Carrossel "Projetos recentes" | `site.estilos` (fotos) + `TXT.*.estilos` (título, texto, descrição da foto) |
 | Grade do portfólio | `site.portfolio` (fotos) + `TXT.*.portfolio` (descrições), na mesma ordem |
 | Avaliações | `site.avaliacoes` (nome, meses, texto, fotos opcionais) |
@@ -40,10 +42,20 @@ favicon.png, apple-touch-icon.png, .htaccess (cache/compressão)
 
 ## Idiomas
 
-O site abre em português. `?lang=en` ou `?lang=es` no endereço já abre no idioma.
+O site abre em inglês. `?lang=pt` ou `?lang=es` no endereço já abre no idioma.
 Para remover um idioma: apague o botão em `<nav class="lang">` no `index.html` e o bloco correspondente em `TXT`.
 
 ## Testar no computador
 
 Abra um terminal nesta pasta e rode `python3 -m http.server 8000`, depois acesse http://localhost:8000
 (abrir o `index.html` direto com dois cliques também funciona, só o mapa pode não carregar).
+
+## Formulário de orçamento
+
+Passo a passo, uma pergunta por vez: estilo → ideia e local do corpo → contato → resumo.
+No fim, o botão abre o Direct do Instagram (`site.direct`). O link do Direct não aceita texto pronto,
+então ao clicar a mensagem com as respostas é copiada e a pessoa só cola na conversa.
+
+Eventos de rastreamento (disparam só se o Meta Pixel, o Google Analytics ou o Tag Manager estiverem instalados):
+`form_start`, `form_step`, `Lead` / `generate_lead` (ao concluir) e `direct_click`.
+No Tag Manager chegam como `qf_form_start`, `qf_form_step`, `qf_lead` e `qf_direct_click`.

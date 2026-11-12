@@ -4,7 +4,7 @@
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-let L = TXT.pt;
+let L = TXT.en;
 const STARS = '<svg aria-hidden="true"><use href="#i-star"/></svg>'.repeat(5);
 
 function photo(src, alt, sizes, lazy = true) {
@@ -27,18 +27,18 @@ function renderGrid() {
 }
 
 /* --- idiomas --- */
-document.querySelectorAll("[data-t]").forEach((el) => { TXT.pt.t[el.dataset.t] = el.innerHTML; });
-document.querySelectorAll("[data-a]").forEach((el) => { const [attr, k] = el.dataset.a.split(":"); TXT.pt.a[k] = el.getAttribute(attr); });
+document.querySelectorAll("[data-t]").forEach((el) => { TXT.en.t[el.dataset.t] = el.innerHTML; });
+document.querySelectorAll("[data-a]").forEach((el) => { const [attr, k] = el.dataset.a.split(":"); TXT.en.a[k] = el.getAttribute(attr); });
 const meta = document.querySelector('meta[name="description"]');
 
 function setLang(code, first) {
-  L = TXT[code] || TXT.pt;
+  L = TXT[code] || TXT.en;
   document.documentElement.lang = L.lang;
   meta.content = L.desc;
-  document.querySelectorAll("[data-t]").forEach((el) => { el.innerHTML = L.t[el.dataset.t] ?? TXT.pt.t[el.dataset.t]; });
-  document.querySelectorAll("[data-a]").forEach((el) => { const [attr, k] = el.dataset.a.split(":"); el.setAttribute(attr, L.a[k] ?? TXT.pt.a[k]); });
+  document.querySelectorAll("[data-t]").forEach((el) => { el.innerHTML = L.t[el.dataset.t] ?? TXT.en.t[el.dataset.t]; });
+  document.querySelectorAll("[data-a]").forEach((el) => { const [attr, k] = el.dataset.a.split(":"); el.setAttribute(attr, L.a[k] ?? TXT.en.a[k]); });
   document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === code)));
-  renderMarquee(); renderReviews();
+  renderMarquee(); renderReviews(); if (window.renderQF) window.renderQF();
   if (first) { renderCarousel(); renderGrid(); return; }
   /* carrossel e grade: só troca textos, sem recriar (não perde posição) */
   document.querySelectorAll("#car-track .style-card").forEach((c, i) => {
@@ -48,8 +48,8 @@ function setLang(code, first) {
   document.querySelectorAll("#grid .pf").forEach((b) => { const alt = L.portfolio[+b.dataset.i]; b.setAttribute("aria-label", L.ampliar + alt); b.querySelector("img").alt = alt; });
 }
 document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
-/* abre em português; ?lang=en ou ?lang=es no endereço já abre no idioma */
-setLang((location.search.match(/[?&]lang=(pt|en|es)\b/) || [])[1] || "pt", true);
+/* abre em inglês; ?lang=pt ou ?lang=es no endereço já abre no idioma */
+setLang((location.search.match(/[?&]lang=(pt|en|es)\b/) || [])[1] || "en", true);
 $("year").textContent = new Date().getFullYear();
 
 /* --- carrossel de projetos: contínuo, pausa no hover, arrasto e setas --- */
@@ -148,6 +148,111 @@ $("reviews").addEventListener("click", (e) => {
   if (!("IntersectionObserver" in window)) return load();
   const io = new IntersectionObserver((en) => { if (en[0].isIntersecting) { load(); io.disconnect(); } }, { rootMargin: "300px" });
   io.observe(box);
+})();
+
+/* --- formulário passo a passo → Direct do Instagram ---
+   1) estilo  2) ideia e local  3) contato  4) resumo + botão do Direct.
+   O link do Direct não aceita texto pronto: ao clicar, a mensagem é copiada e a pessoa só cola na conversa. */
+(function () {
+  const box = $("qf"), TOTAL = 3;
+  const st = { step: 0, style: null, idea: "", first: "", last: "", phone: "", email: "", sent: false, dir: "next", started: false };
+  const F = () => L.qf;
+  const fmt = (s, o) => s.replace(/\{(\w+)\}/g, (_, k) => o[k]);
+  const phoneOk = (v) => { const d = v.replace(/\D/g, ""); return d.length >= 7 && d.length <= 15 && /^[\d\s()+.-]+$/.test(v.trim()); };
+  const emailOk = (v) => !v.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim());
+  function message() {
+    const f = F();
+    return [f.msgHi, "", `${f.lStyle}: ${f.styles[st.style]}`, `${f.lIdea}: ${st.idea.trim()}`, `${f.lName}: ${st.first.trim()} ${st.last.trim()}`, `${f.lPhone}: ${st.phone.trim()}`]
+      .concat(st.email.trim() ? [`${f.lEmail}: ${st.email.trim()}`] : []).join("\n");
+  }
+  const field = (id, label, type, val, opt, extra = "") =>
+    `<div class="field"><label for="qf-${id}">${esc(label)}${opt ? ` <span class="opt">(${esc(F().optional)})</span>` : ""}</label>` +
+    `<input id="qf-${id}" name="${id}" type="${type}" value="${esc(val)}" ${extra} aria-describedby="qf-e-${id}"><p class="field-err" id="qf-e-${id}"></p></div>`;
+  function render(focus) {
+    const f = F();
+    let h = "";
+    if (st.step < TOTAL) {
+      h += `<div class="qf-top"><span class="qf-count">${esc(fmt(f.step, { n: st.step + 1, t: TOTAL }))}</span><div class="qf-bar"><i style="width:${((st.step + 1) / TOTAL) * 100}%"></i></div></div>`;
+    }
+    if (st.step === 0) {
+      h += `<h3 class="qf-q" tabindex="-1">${esc(f.q1)}</h3><div class="qf-opts" role="radiogroup" aria-label="${esc(f.q1)}">` +
+        f.styles.map((o, i) => `<button type="button" class="qf-opt" role="radio" aria-checked="${st.style === i}" data-i="${i}"><span class="qf-dot" aria-hidden="true"></span>${esc(o)}</button>`).join("") +
+        `</div><p class="field-err" id="qf-e-style"></p><div class="qf-nav"><span></span><button type="button" class="qf-btn" data-go="next">${esc(f.next)}</button></div>`;
+    } else if (st.step === 1) {
+      h += `<h3 class="qf-q" tabindex="-1"><label for="qf-idea">${esc(f.q2)}</label></h3><div class="field"><textarea id="qf-idea" rows="4" maxlength="600" placeholder="${esc(f.q2ph)}" aria-describedby="qf-e-idea">${esc(st.idea)}</textarea><p class="field-err" id="qf-e-idea"></p></div>` +
+        `<div class="qf-nav"><button type="button" class="qf-back" data-go="back">${esc(f.back)}</button><button type="button" class="qf-btn" data-go="next">${esc(f.next)}</button></div>`;
+    } else if (st.step === 2) {
+      h += `<h3 class="qf-q" tabindex="-1">${esc(f.q3)}</h3><div class="qf-grid">` +
+        field("first", f.first, "text", st.first, false, 'autocomplete="given-name" maxlength="40" required') +
+        field("last", f.last, "text", st.last, false, 'autocomplete="family-name" maxlength="40" required') +
+        field("phone", f.phone, "tel", st.phone, false, 'autocomplete="tel" inputmode="tel" maxlength="20" placeholder="+1 (305) 555-0123" required') +
+        field("email", f.email, "email", st.email, true, 'autocomplete="email" maxlength="80"') +
+        `</div><div class="qf-nav"><button type="button" class="qf-back" data-go="back">${esc(f.back)}</button><button type="button" class="qf-btn" data-go="next">${esc(f.finish)}</button></div>`;
+    } else {
+      h += `<h3 class="qf-q" tabindex="-1">${esc(fmt(f.doneTitle, { name: st.first.trim() }))}</h3><p class="qf-text">${esc(f.doneText)}</p>` +
+        `<pre class="qf-msg" id="qf-msg">${esc(message())}</pre>` +
+        `<a class="btn-cta" id="cta" href="${esc(site.direct)}" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-ig"/></svg><span>${esc(f.cta)}</span></a>` +
+        `<div class="qf-nav qf-after"><button type="button" class="qf-back" data-go="edit">${esc(f.edit)}</button><button type="button" class="qf-link" data-go="copy">${esc(f.copy)}</button></div><p class="qf-ok" id="qf-ok" role="status"></p>`;
+    }
+    box.innerHTML = `<div class="qf-step${focus && !reduced ? " qf-in-" + st.dir : ""}">${h}</div>`;
+    if (focus) box.querySelector(".qf-q")?.focus({ preventScroll: true });
+  }
+  window.renderQF = () => render(false);
+  function err(id, msg) { const e = $("qf-e-" + id); if (e) e.textContent = msg || ""; const i = $("qf-" + id); if (i) i.setAttribute("aria-invalid", msg ? "true" : "false"); return !msg; }
+  function valid() {
+    const f = F();
+    if (st.step === 0) return err("style", st.style === null ? f.errStyle : "");
+    if (st.step === 1) { const ok = err("idea", st.idea.trim().length < 5 ? f.errIdea : ""); if (!ok) $("qf-idea").focus(); return ok; }
+    if (st.step === 2) {
+      const r = [err("first", st.first.trim() ? "" : f.errReq), err("last", st.last.trim() ? "" : f.errReq),
+        err("phone", !st.phone.trim() ? f.errReq : phoneOk(st.phone) ? "" : f.errPhone), err("email", emailOk(st.email) ? "" : f.errEmail)];
+      const bad = ["first", "last", "phone", "email"][r.indexOf(false)]; if (bad) $("qf-" + bad).focus();
+      return !bad;
+    }
+    return true;
+  }
+  /* rastreamento: dispara só se Meta Pixel / Google Analytics / Tag Manager estiverem instalados na página */
+  function track(ev, extra = {}) {
+    try { if (window.fbq) fbq(ev === "lead" ? "track" : "trackCustom", ev === "lead" ? "Lead" : ev, extra); } catch (_) {}
+    try { if (window.gtag) gtag("event", ev === "lead" ? "generate_lead" : ev, extra); } catch (_) {}
+    try { (window.dataLayer = window.dataLayer || []).push({ event: "qf_" + ev, ...extra }); } catch (_) {}
+  }
+  window.qfTrack = track;
+  function send() {
+    track("lead", { estilo: F().styles[st.style] });
+    if (!site.webhook || st.sent) return; st.sent = true;
+    const dados = new URLSearchParams({ estilo: F().styles[st.style], ideia: st.idea.trim(), nome: st.first.trim(), sobrenome: st.last.trim(), telefone: st.phone.trim(), email: st.email.trim(), idioma: document.documentElement.lang, pagina: location.href });
+    try { fetch(site.webhook, { method: "POST", body: dados, mode: "no-cors", keepalive: true }).catch(() => {}); } catch (_) {}
+  }
+  async function copy() {
+    const t = message(); let ok = false;
+    try { await navigator.clipboard.writeText(t); ok = true; } catch (_) {
+      try { const r = document.createRange(); r.selectNodeContents($("qf-msg")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); ok = document.execCommand("copy"); } catch (_) {}
+    }
+    if (ok && $("qf-ok")) $("qf-ok").textContent = F().copied;
+  }
+  function go(dir) {
+    st.dir = dir === "next" ? "next" : "back";
+    if (dir === "next") { if (!valid()) return; if (!st.started) { st.started = true; track("form_start"); } st.step++; track("form_step", { step: st.step }); if (st.step === TOTAL) send(); }
+    else if (dir === "back") st.step = Math.max(0, st.step - 1);
+    else if (dir === "edit") st.step = 0;
+    render(true);
+    box.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" });
+  }
+  box.addEventListener("click", (e) => {
+    const o = e.target.closest(".qf-opt");
+    if (o) { st.style = +o.dataset.i; box.querySelectorAll(".qf-opt").forEach((b) => b.setAttribute("aria-checked", String(b === o))); err("style", ""); setTimeout(() => { if (st.step === 0) go("next"); }, 220); return; }
+    const g = e.target.closest("[data-go]");
+    if (g) { if (g.dataset.go === "copy") copy(); else go(g.dataset.go); return; }
+    if (e.target.closest("#cta")) { copy(); track("direct_click"); } /* copia ao abrir o Direct (o link abre normalmente) */
+  });
+  box.addEventListener("input", (e) => { const k = e.target.id.replace("qf-", ""); if (k in st) { st[k] = e.target.value; if (e.target.getAttribute("aria-invalid") === "true") err(k, ""); } });
+  box.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.tagName === "INPUT") { e.preventDefault(); go("next"); }
+    const opts = [...box.querySelectorAll(".qf-opt")], i = opts.indexOf(e.target);
+    if (i >= 0 && /Arrow(Down|Right|Up|Left)/.test(e.key)) { e.preventDefault(); opts[(i + (/Down|Right/.test(e.key) ? 1 : -1) + opts.length) % opts.length].focus(); }
+  });
+  render(false);
 })();
 
 /* --- lightbox: portfólio (com setas) e fotos das avaliações (avulsas) --- */
