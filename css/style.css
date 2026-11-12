@@ -140,7 +140,7 @@ img { max-width: 100%; display: block; }
 .rev-badge span { font-size: .8rem; font-weight: 500; color: var(--muted); }
 .reviews { margin-top: 2.5rem; display: flex; align-items: stretch; gap: 1rem; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 1rem; scrollbar-width: none; }
 .reviews::-webkit-scrollbar { display: none; }
-/* todos os cartões com a mesma altura (a do cartão do Elvis/Leandro Cezar) */
+/* todos os cartões de avaliação com a mesma altura */
 .review { flex: none; width: 86%; height: 31rem; scroll-snap-align: start; display: flex; flex-direction: column; padding: 1.5rem; border: 1px solid var(--line); border-radius: .5rem; background: var(--bg); }
 @media (min-width: 640px) { .review { width: calc(50% - .5rem); } }
 @media (min-width: 1024px) { .review { width: calc(33.333% - .667rem); } }

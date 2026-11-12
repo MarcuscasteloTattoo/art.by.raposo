@@ -141,7 +141,7 @@ $("reviews").addEventListener("click", (e) => {
     if (box.querySelector("iframe")) return;
     const f = document.createElement("iframe");
     f.src = box.dataset.src; f.loading = "lazy"; f.referrerPolicy = "no-referrer-when-downgrade";
-    f.title = { "pt-BR": "Mapa do estúdio Léo Lead Tattoo", en: "Map of Léo Lead Tattoo studio", es: "Mapa del estudio Léo Lead Tattoo" }[document.documentElement.lang] || "Mapa";
+    f.title = { "pt-BR": "Mapa do estúdio", en: "Studio map", es: "Mapa del estudio" }[document.documentElement.lang] || "Mapa";
     f.allowFullscreen = true; box.appendChild(f);
     /* se a página onde o site está bloquear mapas incorporados, some com o quadro e deixa o link "Ver no Google Maps" */
     document.addEventListener("securitypolicyviolation", (e) => { if (/google\.com/.test(e.blockedURI || "")) f.remove(); });
@@ -180,11 +180,11 @@ $("reviews").addEventListener("click", (e) => {
       /* data e hora de Brasília: 23/10/2026 16:29:05 */
       data: new Date().toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false }).replace(",", ""),
     });
-    try { fetch(site.webhook, { method: "POST", body: dados, mode: "no-cors", keepalive: true }).catch(() => {}); } catch (_) {}
-    $("form-ok").textContent = L.form.ok; $("form-ok").hidden = false;
+    if (site.webhook) { try { fetch(site.webhook, { method: "POST", body: dados, mode: "no-cors", keepalive: true }).catch(() => {}); } catch (_) {} }
+    $("form-ok").textContent = site.whatsapp ? L.form.ok : L.form.okSemWa; $("form-ok").hidden = false;
     /* nome e telefone vão só para o webhook; o WhatsApp abre apenas com a mensagem padrão */
     const texto = L.msg;
-    window.open(`${site.whatsapp}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
+    if (site.whatsapp) window.open(`${site.whatsapp}?text=${encodeURIComponent(texto)}`, "_blank", "noopener");
   });
 })();
 
