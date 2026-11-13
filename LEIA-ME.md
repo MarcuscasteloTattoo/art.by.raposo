@@ -66,5 +66,5 @@ Eventos:
 ### Webhook (Make)
 
 Ao concluir a última pergunta (antes do clique no Direct), o site envia um POST para `site.webhook`
-com os campos: `estilo` (sempre em inglês), `ideia`, `nome`, `sobrenome`, `telefone`, `email`, `idioma` (en/pt-BR/es) e `pagina`.
+com os campos: `data` (dd/mm/aaaa hh:mm, horário de Miami), `estilo` (sempre em inglês), `ideia`, `nome`, `sobrenome`, `telefone`, `email`, `idioma` (en/pt-BR/es) e `pagina`.
 Não reenvia o mesmo lead; se a pessoa editar as respostas e concluir de novo, envia a versão nova.

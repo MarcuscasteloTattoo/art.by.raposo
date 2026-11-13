@@ -225,9 +225,12 @@ $("reviews").addEventListener("click", (e) => {
   function send() {
     track("form_complete", { estilo: F().styles[st.style] });
     if (!site.webhook) return;
-    const dados = new URLSearchParams({ estilo: TXT.en.qf.styles[st.style] /* sempre em inglês */, ideia: st.idea.trim(), nome: st.first.trim(), sobrenome: st.last.trim(), telefone: st.phone.trim(), email: st.email.trim(), idioma: document.documentElement.lang, pagina: location.href });
+    /* data/hora do cadastro no fuso de Miami, ex.: 13/11/2026 14:05 */
+    let data = "";
+    try { data = new Intl.DateTimeFormat("pt-BR", { timeZone: "America/New_York", day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date()).replace(",", ""); } catch (_) { data = new Date().toISOString(); }
+    const dados = new URLSearchParams({ data, estilo: TXT.en.qf.styles[st.style] /* sempre em inglês */, ideia: st.idea.trim(), nome: st.first.trim(), sobrenome: st.last.trim(), telefone: st.phone.trim(), email: st.email.trim(), idioma: document.documentElement.lang, pagina: location.href });
     /* não reenvia o mesmo lead; reenvia só se a pessoa editou as respostas */
-    const chave = [...dados].filter(([k]) => k !== "idioma").map(([, v]) => v).join("|");
+    const chave = [...dados].filter(([k]) => k !== "idioma" && k !== "data").map(([, v]) => v).join("|");
     if (st.sent === chave) return; st.sent = chave;
     try { fetch(site.webhook, { method: "POST", body: dados, mode: "no-cors", keepalive: true }).catch(() => {}); } catch (_) {}
   }
