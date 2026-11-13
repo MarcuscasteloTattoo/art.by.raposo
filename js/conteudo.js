@@ -95,6 +95,7 @@ const TXT = {
       "Leopardo se espreguiçando nas costas, com a data 11:11",
     ],
     t: {
+      pfCta: "Quero meu orçamento",
       h1: "Fineline <span class=\"nw\">&amp; blackwork</span>",
       heroSub: "Tatuagens autorais em fineline e blackwork, com traços precisos, sombreado suave e composições pensadas para valorizar o seu corpo e contar a sua história.",
       projetos: "Projetos recentes",
@@ -203,7 +204,7 @@ const TXT = {
       orcTitulo: "Shall we create your next tattoo?",
       orcTexto: "Every project starts with a good conversation. Answer three quick questions about your idea, then send everything to me on <strong>Instagram Direct</strong> so I can design an <strong>exclusive project</strong> for you.",
       orcSub: "It takes less than a minute",
-      locTitulo: "Find us", locEnd: "450 NW 28th St<br>Miami – Florida, USA", locAviso: "By appointment only.", locVerMapa: "View on Google Maps", direitos: "All rights reserved.",
+      pfCta: "Get your custom quote", locTitulo: "Find us", locEnd: "450 NW 28th St<br>Miami – Florida, USA", locAviso: "By appointment only.", locVerMapa: "View on Google Maps", direitos: "All rights reserved.",
     },
     a: {
       langAria: "Language", heroAlt: "Tattoo artist with glasses and black gloves, focused while tattooing an arm, with a rose tattooed on his neck",
@@ -273,6 +274,7 @@ const TXT = {
       "Leopardo estirándose en la espalda, con 11:11",
     ],
     t: {
+      pfCta: "Quiero mi presupuesto",
       h1: 'Fineline <span class="nw">&amp; blackwork</span>',
       heroSub: "Tatuajes de autor en fineline y blackwork, con trazos precisos, sombreado suave y composiciones pensadas para realzar tu cuerpo y contar tu historia.",
       projetos: "Proyectos recientes",

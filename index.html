@@ -20,7 +20,7 @@
 <!-- fontes carregadas sem bloquear a primeira pintura da página -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/style.css?v=9">
+<link rel="stylesheet" href="css/style.css?v=10">
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -77,7 +77,7 @@ fbq('track', 'PageView');
 <main>
   <section class="projects">
     <div class="wrap section">
-      <h2 class="h2" style="margin-bottom:2.5rem" data-t="projetos">Recent projects</h2>
+      <h2 class="h2 proj-title" data-t="projetos">Recent projects</h2>
       <div id="car" data-a="aria-label:projetos" aria-label="Recent projects">
         <div class="car-view" id="car-view"><div class="car-track" id="car-track"></div></div>
         <div class="ctrls">
@@ -90,6 +90,8 @@ fbq('track', 'PageView');
 
   <section class="wrap section" id="portfolio" data-a="aria-label:portfolio" aria-label="Portfolio">
     <div class="grid" id="grid"></div>
+    <!-- botão que leva direto ao formulário de orçamento -->
+    <div class="pf-cta"><a class="qf-btn pf-btn" href="#orcamento" id="pf-cta" data-t="pfCta">Get your custom quote</a></div>
   </section>
 
   <section class="wrap section" id="sobre">
@@ -179,7 +181,7 @@ fbq('track', 'PageView');
   <p class="lb-caption" id="lb-caption"></p>
 </div>
 
-<script src="js/conteudo.js?v=9"></script>
+<script src="js/conteudo.js?v=10"></script>
 <script src="js/main.js?v=9"></script>
 </body>
 </html>

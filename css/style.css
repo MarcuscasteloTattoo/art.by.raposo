@@ -34,6 +34,7 @@ img { max-width: 100%; display: block; }
 .wrap { max-width: 72rem; margin: 0 auto; padding-inline: max(24px, env(safe-area-inset-left, 0px)) max(24px, env(safe-area-inset-right, 0px)); }
 .section { padding-block: 4rem; }
 @media (min-width: 768px) { .section { padding-block: 6rem; } }
+.proj-title { margin-bottom: 2.5rem; }
 .h2 { font-size: clamp(1.875rem, 1.5rem + 1.2vw, 2.25rem); line-height: 1.15; text-align: center; }
 .lead { font-size: .875rem; color: var(--muted); text-align: center; margin: 1rem auto 0; max-width: 30rem; line-height: 1.6; }
 .eyebrow { font-family: var(--body); font-size: .75rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); }
@@ -322,4 +323,27 @@ footer { background: var(--ink); color: var(--hero-fg); border-top: 1px solid rg
 @media (pointer: coarse) {
   .lang button { min-height: 2.5rem; padding-inline: .6rem .75rem; }
   .about .link, .foot-links a { min-height: 2.75rem; }
+}
+
+/* botão depois do portfólio → formulário */
+.pf-cta { margin-top: 2rem; display: flex; justify-content: center; }
+.pf-btn { display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding-inline: 2.25rem; }
+
+/* ---------- PRIMEIRA TELA NO CELULAR ----------
+   A primeira tela mostra foto, título, texto, faixa e o começo de "Recent projects",
+   para a pessoa perceber que tem mais conteúdo e rolar. */
+@media (max-width: 767px) {
+  .hero-img { aspect-ratio: auto; height: 34svh; min-height: 12rem; max-height: 22rem; object-position: 50% 45%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 70%, transparent); }
+  .hero-inner { padding-block: .25rem 1.1rem; }
+  .hero h1 .nw { display: block; }
+  .hero .brand { font-size: .66rem; margin-bottom: .35rem; }
+  .hero h1 { font-size: clamp(2.05rem, 1.5rem + 2.4vw, 2.4rem); }
+  .hero-sub { margin-top: .6rem; font-size: .9rem; line-height: 1.5; max-width: 21rem; }
+  .marquee { padding-block: .5rem; }
+  .marquee span { font-size: .68rem; }
+  .projects > .section { padding-top: 1.4rem; }
+  .proj-title { margin-bottom: 1rem; font-size: 1.6rem; }
+  .pf-cta { margin-top: 1.5rem; }
+  .pf-btn { width: 100%; min-height: 3.4rem; font-size: 1rem; }
 }
