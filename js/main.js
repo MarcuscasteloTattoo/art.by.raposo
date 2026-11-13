@@ -224,8 +224,11 @@ $("reviews").addEventListener("click", (e) => {
   window.qfTrack = track;
   function send() {
     track("form_complete", { estilo: F().styles[st.style] });
-    if (!site.webhook || st.sent) return; st.sent = true;
-    const dados = new URLSearchParams({ estilo: F().styles[st.style], ideia: st.idea.trim(), nome: st.first.trim(), sobrenome: st.last.trim(), telefone: st.phone.trim(), email: st.email.trim(), idioma: document.documentElement.lang, pagina: location.href });
+    if (!site.webhook) return;
+    const dados = new URLSearchParams({ estilo: TXT.en.qf.styles[st.style] /* sempre em inglês */, ideia: st.idea.trim(), nome: st.first.trim(), sobrenome: st.last.trim(), telefone: st.phone.trim(), email: st.email.trim(), idioma: document.documentElement.lang, pagina: location.href });
+    /* não reenvia o mesmo lead; reenvia só se a pessoa editou as respostas */
+    const chave = [...dados].filter(([k]) => k !== "idioma").map(([, v]) => v).join("|");
+    if (st.sent === chave) return; st.sent = chave;
     try { fetch(site.webhook, { method: "POST", body: dados, mode: "no-cors", keepalive: true }).catch(() => {}); } catch (_) {}
   }
   async function copy() {

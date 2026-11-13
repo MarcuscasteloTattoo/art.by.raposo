@@ -24,7 +24,7 @@ favicon.png, apple-touch-icon.png, .htaccess (cache/compressão)
 | Textos do letreiro animado | `js/conteudo.js` → `TXT.*.marquee` |
 | Link do Direct (botão final do formulário) | `js/conteudo.js` → `site.direct` |
 | Perguntas, opções e textos do formulário | `js/conteudo.js` → `TXT.*.qf` (en, pt, es) |
-| Receber as respostas em planilha/CRM | `js/conteudo.js` → `site.webhook` (Make, Zapier, n8n…) |
+| Webhook que recebe as respostas (Make) | `js/conteudo.js` → `site.webhook` |
 | Carrossel "Projetos recentes" | `site.estilos` (fotos) + `TXT.*.estilos` (título, texto, descrição da foto) |
 | Grade do portfólio | `site.portfolio` (fotos) + `TXT.*.portfolio` (descrições), na mesma ordem |
 | Avaliações | `site.avaliacoes` (nome, meses, texto, fotos opcionais) |
@@ -62,3 +62,9 @@ Eventos:
 - `form_start`, `form_step`, `form_complete` — eventos personalizados do funil (não contam como conversão)
 - **`Lead` (conversão)** — dispara quando a pessoa completou o formulário **e** clicou para ir ao Direct; uma vez por visita.
   Também vai para o Google Analytics (`generate_lead`) e Tag Manager (`qf_lead`), se forem instalados.
+
+### Webhook (Make)
+
+Ao concluir a última pergunta (antes do clique no Direct), o site envia um POST para `site.webhook`
+com os campos: `estilo` (sempre em inglês), `ideia`, `nome`, `sobrenome`, `telefone`, `email`, `idioma` (en/pt-BR/es) e `pagina`.
+Não reenvia o mesmo lead; se a pessoa editar as respostas e concluir de novo, envia a versão nova.
