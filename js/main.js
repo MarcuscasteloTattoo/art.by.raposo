@@ -8,8 +8,8 @@ let L = TXT.en;
 const STARS = '<svg aria-hidden="true"><use href="#i-star"/></svg>'.repeat(5);
 
 function photo(src, alt, sizes, lazy = true) {
-  const small = src.replace(/\.webp$/, "-480.webp");
-  return `<span class="ph"><img src="${src}" srcset="${small} 480w, ${src} 900w" sizes="${sizes}" alt="${esc(alt)}"${lazy ? ' loading="lazy"' : ""} decoding="async" draggable="false"></span>`;
+  const v = (w) => src.replace(/\.webp$/, `-${w}.webp`);
+  return `<span class="ph"><img src="${src}" srcset="${v(320)} 320w, ${v(400)} 400w, ${v(480)} 480w, ${src} 900w" sizes="${sizes}" alt="${esc(alt)}"${lazy ? ' loading="lazy"' : ""} decoding="async" draggable="false"></span>`;
 }
 
 /* --- render --- */
@@ -20,12 +20,12 @@ function renderMarquee() {
   $("marquee").innerHTML = html; $("marquee2").innerHTML = html;
 }
 function renderCarousel() {
-  const card = (e, i) => { const [tit, txt, alt] = L.estilos[i]; return `<article class="style-card">${photo(e.img, alt, "(min-width: 640px) 19rem, 15rem")}<h3>${esc(tit)}</h3><p>${esc(txt)}</p></article>`; };
+  const card = (e, i) => { const [tit, txt, alt] = L.estilos[i]; return `<article class="style-card">${photo(e.img, alt, "(min-width: 640px) 19rem, 14rem")}<h3>${esc(tit)}</h3><p>${esc(txt)}</p></article>`; };
   $("car-track").innerHTML = [0, 1, 2, 3].map((c) => `<div class="car-copy"${c ? ' aria-hidden="true"' : ""}>${site.estilos.map(card).join("")}</div>`).join("");
 }
 function renderGrid() {
   $("grid").innerHTML = site.portfolio.map((src, i) =>
-    `<button type="button" class="pf" data-i="${i}" aria-label="${esc(L.ampliar + L.portfolio[i])}">${photo(src, L.portfolio[i], "(min-width: 768px) 23rem, 50vw")}</button>`).join("");
+    `<button type="button" class="pf" data-i="${i}" aria-label="${esc(L.ampliar + L.portfolio[i])}">${photo(src, L.portfolio[i], "(min-width: 768px) 23rem, calc(50vw - 2rem)")}</button>`).join("");
 }
 
 /* --- idiomas --- */

@@ -13,13 +13,14 @@
 <meta name="theme-color" content="#0b0b0b">
 <link rel="icon" type="image/png" href="favicon.png?v=3">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
-<link rel="preload" as="image" href="assets/banner-raposo.webp" imagesrcset="assets/banner-raposo-800.webp 800w, assets/banner-raposo.webp 1320w" imagesizes="(min-width: 768px) 50vw, 100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(max-width: 767px)" href="assets/banner-raposo-m800.webp" imagesrcset="assets/banner-raposo-m800.webp 800w, assets/banner-raposo-m1080.webp 1080w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(min-width: 768px)" href="assets/banner-raposo.webp" imagesrcset="assets/banner-raposo-800.webp 800w, assets/banner-raposo.webp 1320w" imagesizes="50vw" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- fontes carregadas sem bloquear a primeira pintura da página -->
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap"></noscript>
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -43,7 +44,11 @@
     <button type="button" data-lang="pt" aria-pressed="false" title="Português"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009C3B"/><path d="M15 2.2 27.6 10 15 17.8 2.4 10Z" fill="#FFDF00"/><circle cx="15" cy="10" r="4.3" fill="#002776"/><path d="M10.9 9.1c2.7-.6 5.6-.2 8.2 1.4" stroke="#fff" stroke-width=".7" fill="none"/></svg>PT</button>
     <button type="button" data-lang="es" aria-pressed="false" title="Español"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>ES</button>
   </nav>
-  <img class="hero-img" src="assets/banner-raposo.webp" srcset="assets/banner-raposo-800.webp 800w, assets/banner-raposo.webp 1320w" sizes="(min-width: 768px) 50vw, 100vw" width="1320" height="2343" fetchpriority="high" decoding="async" data-a="alt:heroAlt" alt="Tattoo artist with glasses and black gloves, focused while tattooing an arm, with a rose tattooed on his neck">
+  <picture>
+    <!-- celular: versão quadrada (o topo no celular é quadrado) -->
+    <source media="(max-width: 767px)" srcset="assets/banner-raposo-m800.webp 800w, assets/banner-raposo-m1080.webp 1080w" sizes="100vw" width="1080" height="1080">
+    <img class="hero-img" src="assets/banner-raposo.webp" srcset="assets/banner-raposo-800.webp 800w, assets/banner-raposo.webp 1320w" sizes="50vw" width="1320" height="2343" fetchpriority="high" decoding="async" data-a="alt:heroAlt" alt="Tattoo artist with glasses and black gloves, focused while tattooing an arm, with a rose tattooed on his neck">
+  </picture>
   <div class="wrap hero-inner">
     <div class="hero-copy">
       <p class="brand">Art by Raposo</p>
@@ -74,7 +79,7 @@
 
   <section class="wrap section" id="sobre">
     <div class="about">
-      <img class="about-img" src="assets/sobre-raposo.webp" srcset="assets/sobre-raposo-480.webp 480w, assets/sobre-raposo.webp 800w" sizes="(min-width: 768px) 24rem, 22rem" width="800" height="1000" loading="lazy" decoding="async" data-a="alt:aboutAlt" alt="Tattoo artist smiling and giving a thumbs up in the studio, in a black T-shirt and black gloves, with a forearm tattoo">
+      <img class="about-img" src="assets/sobre-raposo.webp" srcset="assets/sobre-raposo-480.webp 480w, assets/sobre-raposo-640.webp 640w, assets/sobre-raposo.webp 800w" sizes="(min-width: 768px) 24rem, calc(100vw - 3rem)" width="800" height="1000" loading="lazy" decoding="async" data-a="alt:aboutAlt" alt="Tattoo artist smiling and giving a thumbs up in the studio, in a black T-shirt and black gloves, with a forearm tattoo">
       <div>
         <h2>Raposo</h2>
         <p data-t="sobre1">I'm Raposo, a tattoo artist specializing in fineline and blackwork, with work defined by fine lines, florals and delicate compositions.</p>
@@ -120,7 +125,7 @@
         <p class="loc-note"><svg aria-hidden="true"><use href="#i-clock"/></svg><span data-t="locAviso">By appointment only.</span></p>
       </div>
       <div class="loc-media">
-        <img class="loc-img" src="assets/estudio-miami.webp" srcset="assets/estudio-miami-480.webp 480w, assets/estudio-miami.webp 800w" sizes="(min-width: 768px) 22rem, 100vw" width="800" height="1000" loading="lazy" decoding="async" data-a="alt:locAlt" alt="Interior of the tattoo studio in Miami, spacious and bright, with black tattoo beds, plants and black and white graffiti murals">
+        <img class="loc-img" src="assets/estudio-miami.webp" srcset="assets/estudio-miami-480.webp 480w, assets/estudio-miami-640.webp 640w, assets/estudio-miami.webp 800w" sizes="(min-width: 768px) 22rem, calc(100vw - 3rem)" width="800" height="1000" loading="lazy" decoding="async" data-a="alt:locAlt" alt="Interior of the tattoo studio in Miami, spacious and bright, with black tattoo beds, plants and black and white graffiti murals">
         <!-- mapa: ao mudar o endereço, troque também no data-src e no link -->
         <div class="map" id="map" data-src="https://www.google.com/maps?q=450%20NW%2028th%20St%2C%20Miami%2C%20FL&amp;output=embed"><a class="map-ph" href="https://www.google.com/maps/search/?api=1&amp;query=450%20NW%2028th%20St%2C%20Miami%2C%20FL" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-pin"/></svg><span data-t="locVerMapa">View on Google Maps</span></a></div>
       </div>
@@ -160,6 +165,6 @@
 </div>
 
 <script src="js/conteudo.js?v=8"></script>
-<script src="js/main.js?v=5"></script>
+<script src="js/main.js?v=6"></script>
 </body>
 </html>

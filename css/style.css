@@ -39,7 +39,9 @@ img { max-width: 100%; display: block; }
 .eyebrow { font-family: var(--body); font-size: .75rem; font-weight: 500; letter-spacing: .25em; text-transform: uppercase; color: var(--accent); }
 .icon { width: 1rem; height: 1rem; flex: none; }
 
-/* ---------- HERO ----------
+/* ---------- HERO ---------- */
+.hero picture { display: block; }
+/*
    Celular: foto em cima, texto embaixo. Tablet/PC: foto à esquerda, texto à direita.
    O texto nunca fica em cima da foto; a foto só "desbota" na borda para o fundo escuro. */
 .hero { position: relative; overflow: hidden; background: var(--ink); color: var(--hero-fg); }
