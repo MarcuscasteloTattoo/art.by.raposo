@@ -213,7 +213,9 @@ $("reviews").addEventListener("click", (e) => {
     }
     return true;
   }
-  /* rastreamento: dispara só se Meta Pixel / Google Analytics / Tag Manager estiverem instalados na página */
+  /* rastreamento (Meta Pixel / Google Analytics / Tag Manager, se instalados):
+     - form_start / form_step / form_complete: eventos personalizados do funil
+     - lead: CONVERSÃO — formulário completo + clique para ir ao Direct (1 vez por visita) → Pixel "Lead" */
   function track(ev, extra = {}) {
     try { if (window.fbq) fbq(ev === "lead" ? "track" : "trackCustom", ev === "lead" ? "Lead" : ev, extra); } catch (_) {}
     try { if (window.gtag) gtag("event", ev === "lead" ? "generate_lead" : ev, extra); } catch (_) {}
@@ -221,7 +223,7 @@ $("reviews").addEventListener("click", (e) => {
   }
   window.qfTrack = track;
   function send() {
-    track("lead", { estilo: F().styles[st.style] });
+    track("form_complete", { estilo: F().styles[st.style] });
     if (!site.webhook || st.sent) return; st.sent = true;
     const dados = new URLSearchParams({ estilo: F().styles[st.style], ideia: st.idea.trim(), nome: st.first.trim(), sobrenome: st.last.trim(), telefone: st.phone.trim(), email: st.email.trim(), idioma: document.documentElement.lang, pagina: location.href });
     try { fetch(site.webhook, { method: "POST", body: dados, mode: "no-cors", keepalive: true }).catch(() => {}); } catch (_) {}
@@ -246,7 +248,10 @@ $("reviews").addEventListener("click", (e) => {
     if (o) { st.style = +o.dataset.i; box.querySelectorAll(".qf-opt").forEach((b) => b.setAttribute("aria-checked", String(b === o))); err("style", ""); setTimeout(() => { if (st.step === 0) go("next"); }, 220); return; }
     const g = e.target.closest("[data-go]");
     if (g) { if (g.dataset.go === "copy") copy(); else go(g.dataset.go); return; }
-    if (e.target.closest("#cta")) { copy(); track("direct_click"); } /* copia ao abrir o Direct (o link abre normalmente) */
+    if (e.target.closest("#cta")) { /* copia ao abrir o Direct (o link abre normalmente) e registra a conversão */
+      copy();
+      if (!st.lead) { st.lead = true; track("lead", { content_name: "Instagram Direct", content_category: F().styles[st.style] }); }
+    }
   });
   box.addEventListener("input", (e) => { const k = e.target.id.replace("qf-", ""); if (k in st) { st[k] = e.target.value; if (e.target.getAttribute("aria-invalid") === "true") err(k, ""); } });
   box.addEventListener("keydown", (e) => {

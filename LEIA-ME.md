@@ -56,6 +56,9 @@ Passo a passo, uma pergunta por vez: estilo → ideia e local do corpo → conta
 No fim, o botão abre o Direct do Instagram (`site.direct`). O link do Direct não aceita texto pronto,
 então ao clicar a mensagem com as respostas é copiada e a pessoa só cola na conversa.
 
-Eventos de rastreamento (disparam só se o Meta Pixel, o Google Analytics ou o Tag Manager estiverem instalados):
-`form_start`, `form_step`, `Lead` / `generate_lead` (ao concluir) e `direct_click`.
-No Tag Manager chegam como `qf_form_start`, `qf_form_step`, `qf_lead` e `qf_direct_click`.
+Meta Pixel instalado no `index.html` (ID 1110677975101760), com PageView em toda visita.
+
+Eventos:
+- `form_start`, `form_step`, `form_complete` — eventos personalizados do funil (não contam como conversão)
+- **`Lead` (conversão)** — dispara quando a pessoa completou o formulário **e** clicou para ir ao Direct; uma vez por visita.
+  Também vai para o Google Analytics (`generate_lead`) e Tag Manager (`qf_lead`), se forem instalados.
