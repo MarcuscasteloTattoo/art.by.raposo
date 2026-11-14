@@ -97,7 +97,7 @@ const TXT = {
     t: {
       pfCta: "Quero meu orçamento",
       h1: "Fineline <span class=\"nw\">&amp; blackwork</span>",
-      heroSub: "Tatuagens autorais em fineline e blackwork, com traços precisos, sombreado suave e composições pensadas para valorizar o seu corpo e contar a sua história.",
+      heroSub: "Tatuagens autorais com traços precisos e sombreado suave, feitas para contar a sua história.",
       projetos: "Projetos recentes",
       sobre1: "Sou o Raposo, tatuador especializado em fineline e blackwork, com um trabalho marcado por traços finos, florais e composições delicadas.",
       sobre2: "Cada projeto é desenhado de forma exclusiva, a partir da sua ideia e da sua história, com atenção a cada linha, sombra e detalhe, para que a tatuagem acompanhe o movimento do corpo e continue bonita com o passar do tempo.",
@@ -195,7 +195,7 @@ const TXT = {
     ],
     t: {
       h1: 'Fineline <span class="nw">&amp; blackwork</span>',
-      heroSub: "Original fineline and blackwork tattoos, with precise lines, soft shading and compositions designed to enhance your body and tell your story.",
+      heroSub: "Original tattoos with precise lines and soft shading, designed to tell your story.",
       projetos: "Recent projects",
       sobre1: "I'm Raposo, a tattoo artist specializing in fineline and blackwork, with work defined by fine lines, florals and delicate compositions.",
       sobre2: "Every project is designed exclusively, based on your idea and your story, with attention to every line, shadow and detail, so the tattoo follows the movement of your body and stays beautiful over time.",
@@ -276,7 +276,7 @@ const TXT = {
     t: {
       pfCta: "Quiero mi presupuesto",
       h1: 'Fineline <span class="nw">&amp; blackwork</span>',
-      heroSub: "Tatuajes de autor en fineline y blackwork, con trazos precisos, sombreado suave y composiciones pensadas para realzar tu cuerpo y contar tu historia.",
+      heroSub: "Tatuajes de autor con trazos precisos y sombreado suave, creados para contar tu historia.",
       projetos: "Proyectos recientes",
       sobre1: "Soy Raposo, tatuador especializado en fineline y blackwork, con un trabajo marcado por trazos finos, florales y composiciones delicadas.",
       sobre2: "Cada proyecto se diseña de forma exclusiva, a partir de tu idea y tu historia, con atención a cada línea, sombra y detalle, para que el tatuaje acompañe el movimiento del cuerpo y siga bonito con el paso del tiempo.",
