@@ -68,3 +68,7 @@ Eventos:
 Ao concluir a última pergunta (antes do clique no Direct), o site envia um POST para `site.webhook`
 com os campos: `data` (dd/mm/aaaa hh:mm, horário de Miami), `estilo` (sempre em inglês), `ideia`, `nome`, `sobrenome`, `telefone`, `email`, `idioma` (en/pt-BR/es) e `pagina`.
 Não reenvia o mesmo lead; se a pessoa editar as respostas e concluir de novo, envia a versão nova.
+
+## llms.txt
+
+`llms.txt` (raiz do site): resumo em Markdown para assistentes de IA. Ao mudar endereço, Instagram ou link do Direct, atualize também esse arquivo.
