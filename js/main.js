@@ -217,7 +217,7 @@ $("reviews").addEventListener("click", (e) => {
      - form_start / form_step / form_complete: eventos personalizados do funil
      - lead: CONVERSÃO — formulário completo + clique para ir ao Direct (1 vez por visita) → Pixel "Lead" */
   function track(ev, extra = {}) {
-    try { if (window.fbq) fbq(ev === "lead" ? "track" : "trackCustom", ev === "lead" ? "Lead" : ev, extra); } catch (_) {}
+    try { if (window.fbq) { fbq(ev === "lead" ? "track" : "trackCustom", ev === "lead" ? "Lead" : ev, extra); if (window.fbqLoad) fbqLoad(); } } catch (_) {}
     try { if (window.gtag) gtag("event", ev === "lead" ? "generate_lead" : ev, extra); } catch (_) {}
     try { (window.dataLayer = window.dataLayer || []).push({ event: "qf_" + ev, ...extra }); } catch (_) {}
   }

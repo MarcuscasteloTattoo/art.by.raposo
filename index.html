@@ -21,16 +21,24 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="css/style.css?v=11">
-<!-- Meta Pixel Code -->
+<!-- Meta Pixel Code (carregamento adiado para não atrasar a primeira tela)
+     Os eventos (PageView, Lead…) entram numa fila na hora e são enviados assim que o fbevents.js carrega:
+     no primeiro toque/rolagem/tecla ou ~1 s depois que a página terminou de carregar. -->
 <script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
+(function(w,d){
+  if(w.fbq)return;
+  var n=w.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!w._fbq)w._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];
+  var feito=false;
+  function carregar(){
+    if(feito)return;feito=true;
+    var t=d.createElement('script');t.async=!0;t.src='https://connect.facebook.net/en_US/fbevents.js';
+    d.head.appendChild(t);
+  }
+  w.fbqLoad=carregar;
+  ['pointerdown','touchstart','keydown','scroll'].forEach(function(ev){w.addEventListener(ev,carregar,{once:true,passive:true})});
+  w.addEventListener('load',function(){setTimeout(carregar,1000)});
+})(window,document);
 fbq('init', '1110677975101760');
 fbq('track', 'PageView');
 </script>
@@ -62,7 +70,7 @@ fbq('track', 'PageView');
   <picture>
     <!-- celular: versão quadrada (o topo no celular é quadrado) -->
     <source media="(max-width: 767px)" srcset="assets/banner-raposo-m800.webp 800w, assets/banner-raposo-m1080.webp 1080w" sizes="100vw" width="1080" height="1080">
-    <img class="hero-img" src="assets/banner-raposo.webp" srcset="assets/banner-raposo-800.webp 800w, assets/banner-raposo.webp 1320w" sizes="50vw" width="1320" height="2343" fetchpriority="high" decoding="async" data-a="alt:heroAlt" alt="Tattoo artist with glasses and black gloves, focused while tattooing an arm, with a rose tattooed on his neck">
+    <img class="hero-img" src="assets/banner-raposo.webp" srcset="assets/banner-raposo-800.webp 800w, assets/banner-raposo.webp 1320w" sizes="50vw" width="1320" height="2343" fetchpriority="high" data-a="alt:heroAlt" alt="Tattoo artist with glasses and black gloves, focused while tattooing an arm, with a rose tattooed on his neck">
   </picture>
   <div class="wrap hero-inner">
     <div class="hero-copy">
@@ -182,6 +190,6 @@ fbq('track', 'PageView');
 </div>
 
 <script src="js/conteudo.js?v=10"></script>
-<script src="js/main.js?v=10"></script>
+<script src="js/main.js?v=11"></script>
 </body>
 </html>
