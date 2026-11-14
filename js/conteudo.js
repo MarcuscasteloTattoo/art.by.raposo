@@ -117,6 +117,7 @@ const TXT = {
       direitos: "Todos os direitos reservados.",
     },
     a: {
+      scrollAria: "Rolar para baixo",
       langAria: "Idioma",
       heroAlt: "Tatuador de óculos e luvas pretas, concentrado enquanto tatua um braço, com uma rosa tatuada no pescoço",
       projetos: "Projetos recentes",
@@ -288,6 +289,7 @@ const TXT = {
       locTitulo: "Dónde estamos", locEnd: "450 NW 28th St<br>Miami – Florida, EE. UU.", locAviso: "Atención solo con cita previa.", locVerMapa: "Ver en Google Maps", direitos: "Todos los derechos reservados.",
     },
     a: {
+      scrollAria: "Desplazarse hacia abajo",
       langAria: "Idioma", heroAlt: "Tatuador con gafas y guantes negros, concentrado mientras tatúa un brazo, con una rosa tatuada en el cuello",
       projetos: "Proyectos recientes", projAnt: "Proyecto anterior", projProx: "Siguiente proyecto", portfolio: "Portafolio", avAria: "Reseñas de clientes", avAnt: "Reseña anterior", avProx: "Siguiente reseña",
       locAlt: "Interior del estudio de tatuajes en Miami, amplio y luminoso, con camillas negras, plantas y murales de grafiti en blanco y negro",
