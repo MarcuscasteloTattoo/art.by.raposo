@@ -54,6 +54,16 @@ document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("cli
 setLang((location.search.match(/[?&]lang=(pt|en|es)\b/) || [])[1] || "en", true);
 $("year").textContent = new Date().getFullYear();
 
+/* --- movimento (faixa de palavras e carrossel) só começa no primeiro sinal de uso:
+   rolar, tocar, mover o mouse ou teclar. Deixa a primeira tela estável, o que melhora
+   o Speed Index/LCP do PageSpeed; para quem usa o site, a diferença é imperceptível. --- */
+let moving = false;
+(function () {
+  const on = () => { if (moving) return; moving = true; document.documentElement.classList.add("mov"); EVS.forEach((e) => removeEventListener(e, on)); };
+  const EVS = ["pointermove", "pointerdown", "touchstart", "wheel", "scroll", "keydown"];
+  EVS.forEach((e) => addEventListener(e, on, { passive: true }));
+})();
+
 /* --- carrossel de projetos: contínuo, pausa no hover, arrasto e setas --- */
 (function () {
   const track = $("car-track"), view = $("car-view"), box = $("car");
@@ -68,7 +78,7 @@ $("year").textContent = new Date().getFullYear();
     if (w > 0 && visible) {
       if (st.drag) {}
       else if (st.target !== null) { const d = st.target - st.pos; if (Math.abs(d) < .5) { st.pos = st.target; st.target = null; } else st.pos += d * Math.min(1, dt * 9); }
-      else if (!st.paused && !reduced && $("lb").hidden) st.pos += (w / 14) * dt;
+      else if (moving && !st.paused && !reduced && $("lb").hidden) st.pos += (w / 14) * dt;
       const wrapBy = st.pos >= w ? -w : st.pos < 0 ? w : 0;
       if (wrapBy) { st.pos += wrapBy; if (st.target !== null) st.target += wrapBy; if (st.drag) st.drag.pos += wrapBy; }
       track.style.transform = `translate3d(${-st.pos}px,0,0)`;
