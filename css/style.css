@@ -336,12 +336,11 @@ footer { background: var(--ink); color: var(--hero-fg); border-top: 1px solid rg
    A primeira tela mostra foto, título, texto, faixa e o começo de "Recent projects",
    para a pessoa perceber que tem mais conteúdo e rolar. */
 @media (max-width: 767px) {
-  .hero-img { aspect-ratio: auto; height: 44svh; min-height: 15rem; max-height: 27rem; object-position: 50% 18%;
+  .hero-img { aspect-ratio: auto; height: 50svh; min-height: 16rem; max-height: 30rem; object-position: 50% 12%;
     -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 70%, transparent); }
   .hero-inner { padding-block: .25rem 1.1rem; }
-  .hero h1 .nw { display: block; }
   .hero .brand { font-size: .66rem; margin-bottom: .35rem; }
-  .hero h1 { font-size: clamp(2.05rem, 1.5rem + 2.4vw, 2.4rem); }
+  .hero h1 { font-size: min(2.35rem, 9.2vw); white-space: nowrap; } /* título numa linha só */
   .hero-sub { margin-top: .6rem; font-size: .9rem; line-height: 1.5; max-width: 21rem; }
   .marquee { padding-block: .5rem; }
   .marquee span { font-size: .68rem; }
