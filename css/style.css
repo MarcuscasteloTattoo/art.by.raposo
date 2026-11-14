@@ -333,7 +333,7 @@ footer { background: var(--ink); color: var(--hero-fg); border-top: 1px solid rg
    A primeira tela mostra foto, título, texto, faixa e o começo de "Recent projects",
    para a pessoa perceber que tem mais conteúdo e rolar. */
 @media (max-width: 767px) {
-  .hero-img { aspect-ratio: auto; height: 34svh; min-height: 12rem; max-height: 22rem; object-position: 50% 45%;
+  .hero-img { aspect-ratio: auto; height: 44svh; min-height: 15rem; max-height: 27rem; object-position: 50% 18%;
     -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent); mask-image: linear-gradient(to bottom, #000 70%, transparent); }
   .hero-inner { padding-block: .25rem 1.1rem; }
   .hero h1 .nw { display: block; }
