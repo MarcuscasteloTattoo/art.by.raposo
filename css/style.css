@@ -351,7 +351,7 @@ footer { background: var(--ink); color: var(--hero-fg); border-top: 1px solid rg
 }
 
 /* ---------- ENTRADA ANIMADA DO TOPO ----------
-   1) texto revelado em cascata  2) traço dourado se desenhando  3) indicador de rolagem
+   1) texto revelado em cascata  2) traço dourado se desenhando
    A foto aparece na hora (não é animada); tudo termina em ~1,5 s. */
 .rv { animation: rvIn .75s cubic-bezier(.2,.7,.2,1) both; }
 .brand.rv { animation-delay: .05s; }
@@ -364,22 +364,12 @@ footer { background: var(--ink); color: var(--hero-fg); border-top: 1px solid rg
   stroke-dasharray: 1; stroke-dashoffset: 1; animation: ink 1s .55s cubic-bezier(.65,0,.35,1) forwards; filter: drop-shadow(0 0 3px rgb(214 178 94 / .55)); }
 @keyframes ink { to { stroke-dashoffset: 0; } }
 
-.scroll-cue { position: relative; display: block; width: 1.5rem; height: 2.4rem; margin: .9rem auto 0; opacity: 0; animation: cueIn .5s 1.4s ease forwards; }
-.scroll-cue::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: linear-gradient(rgb(214 178 94 / .0), rgb(214 178 94 / .55)); }
-.scroll-cue i { position: absolute; left: 50%; top: 0; width: 5px; height: 5px; margin-left: -2.5px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px var(--gold);
-  animation: drop 1.6s 1.5s cubic-bezier(.5,0,.5,1) 3 both; }
-@keyframes cueIn { to { opacity: 1; } }
-@keyframes drop { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(2.3rem); opacity: 0; } }
-html.mov .scroll-cue { opacity: 0; transition: opacity .4s; animation: none; } /* some quando a pessoa começa a rolar */
 
 @media (min-width: 768px) {
   .ink-line { margin-left: 0; width: min(20rem, 70%); }
-  .scroll-cue { margin: 2rem 0 0 0; height: 3rem; }
 }
-@media (max-width: 767px) { .scroll-cue { height: 2rem; margin-top: .6rem; } @keyframes drop { 100% { transform: translateY(1.9rem); opacity: 0; } } }
 @media (prefers-reduced-motion: reduce) {
-  .rv, .ink-line path, .scroll-cue, .scroll-cue i { animation: none !important; }
+  .rv, .ink-line path { animation: none !important; }
   .rv { opacity: 1; clip-path: none; transform: none; }
   .ink-line path { stroke-dashoffset: 0; }
-  .scroll-cue { opacity: 1; }
 }
